@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace AccountManageApp
 {
-    internal class BankAccount
+    public class BankAccount //Class namely bankAcoount
     {
-        public string Name { get; set; }
+        public string Owner { get; set; }
         public Guid AccountNumber { get; set; }
         public decimal Balance { get; set; }
     }
