@@ -1,7 +1,9 @@
 namespace AccountManageApp
 {
+
     public partial class Form1 : Form //Form1 is also a class
     {
+    List<BankAccount> BankAccounts = new List<BankAccount>(); //Global
         public Form1() //This is special type of method called constructor
         {
             InitializeComponent();
@@ -17,11 +19,11 @@ namespace AccountManageApp
             //bankAccount2.AccountNumber = Guid.NewGuid();
             //bankAccount2.Balance = 304;
 
-            List<BankAccount> bankAccounts = new List<BankAccount>();
-            bankAccounts.Add(bankAccount);
-            bankAccounts.Add(bankAccount2);
+            //List<BankAccount> bankAccounts = new List<BankAccount>();
+            BankAccounts.Add(bankAccount);
+            BankAccounts.Add(bankAccount2);
 
-            BankAccountsGrid.DataSource = bankAccounts;
+            BankAccountsGrid.DataSource = BankAccounts;
 
         }
 
@@ -33,6 +35,23 @@ namespace AccountManageApp
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void CreateAccountBtn_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(OwnerTxt.Text)) {
+                return;
+            }
+            BankAccount bankAccount3 = new BankAccount(OwnerTxt.Text);
+            BankAccounts.Add(bankAccount3);
+            RefreshGrid();
+            OwnerTxt.Text = string.Empty;
+
+        }
+        private void RefreshGrid()
+        {
+            BankAccountsGrid.DataSource = null;
+            BankAccountsGrid.DataSource = BankAccounts;
         }
     }
 }
