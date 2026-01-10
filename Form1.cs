@@ -5,15 +5,17 @@ namespace AccountManageApp
         public Form1() //This is special type of method called constructor
         {
             InitializeComponent();
-            BankAccount bankAccount = new BankAccount();
-            bankAccount.Owner = "Pawan";
-            bankAccount.AccountNumber = Guid.NewGuid();
-            bankAccount.Balance = 300;
+            //BankAccount bankAccount = new BankAccount("Pawan", Guid.NewGuid(), 0); //remove guid, 0 because it is constant, will handle from constructot
+            BankAccount bankAccount = new BankAccount("Pawan"); //remove guid, 0 because it is constant, will handle from constructot
+            //bankAccount.Owner = "Pawan";
+            //bankAccount.AccountNumber = Guid.NewGuid();
+            //bankAccount.Balance = 300;
+            BankAccount bankAccount2 = new BankAccount("Pandey");
 
-            BankAccount bankAccount2 = new BankAccount();
-            bankAccount2.Owner = "Pandey";
-            bankAccount2.AccountNumber = Guid.NewGuid();
-            bankAccount2.Balance = 304;
+            //BankAccount bankAccount2 = new BankAccount();
+            //bankAccount2.Owner = "Pandey";
+            //bankAccount2.AccountNumber = Guid.NewGuid();
+            //bankAccount2.Balance = 304;
 
             List<BankAccount> bankAccounts = new List<BankAccount>();
             bankAccounts.Add(bankAccount);
