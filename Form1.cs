@@ -3,7 +3,7 @@ namespace AccountManageApp
 
     public partial class Form1 : Form //Form1 is also a class
     {
-    List<BankAccount> BankAccounts = new List<BankAccount>(); //Global
+        List<BankAccount> BankAccounts = new List<BankAccount>(); //Global
         public Form1() //This is special type of method called constructor
         {
             InitializeComponent();
@@ -39,7 +39,8 @@ namespace AccountManageApp
 
         private void CreateAccountBtn_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(OwnerTxt.Text)) {
+            if (string.IsNullOrEmpty(OwnerTxt.Text))
+            {
                 return;
             }
             BankAccount bankAccount3 = new BankAccount(OwnerTxt.Text);
@@ -52,6 +53,34 @@ namespace AccountManageApp
         {
             BankAccountsGrid.DataSource = null;
             BankAccountsGrid.DataSource = BankAccounts;
+        }
+
+        private void DepositBtn_Click(object sender, EventArgs e)
+        {
+            if (BankAccountsGrid.SelectedRows.Count == 1 && AmountNum.Value > 0)
+            {
+                BankAccount selectedBankAccount = BankAccountsGrid.SelectedRows[0].DataBoundItem as BankAccount;
+                //selectedBankAccount.Balance += AmountNum.Value;
+                //Involke deposit method
+                string message = selectedBankAccount.Deposit(AmountNum.Value);
+                RefreshGrid();
+                AmountNum.Value = 0;
+                MessageBox.Show(message);
+            }
+
+        }
+
+        private void WithdrawBtn_Click(object sender, EventArgs e)
+        {
+            if (BankAccountsGrid.SelectedRows.Count == 1 && AmountNum.Value > 0)
+            {
+                BankAccount selectedBankAccount = BankAccountsGrid.SelectedRows[0].DataBoundItem as BankAccount;
+                //selectedBankAccount.Balance -= AmountNum.Value;
+                string msg = selectedBankAccount.Withdraw(AmountNum.Value);
+                RefreshGrid();
+                AmountNum.Value = 0;
+                MessageBox.Show(msg);
+            }
         }
     }
 }
